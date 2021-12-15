@@ -6,15 +6,21 @@ import Author from '../types/author'
 
 type Props = {
   title: string
+  premiun: boolean
   coverImage: string
   date: string
   author: Author
 }
 
-const PostHeader = ({ title, coverImage, date, author }: Props) => {
+const PostHeader = ({ title, premiun, coverImage, date, author }: Props) => {
   return (
     <>
-      <PostTitle>{title}</PostTitle>
+      <PostTitle>
+        <>
+        {title}  
+        <small>{premiun ? '🔒':'🔓'}</small>
+        </>
+        </PostTitle>
       <div className="hidden md:block md:mb-12">
         <Avatar name={author.name} picture={author.picture} />
       </div>
