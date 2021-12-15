@@ -11,6 +11,7 @@ import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 import markdownToHtml from '../../lib/markdownToHtml'
 import PostType from '../../types/post'
+import privateRoutes from '../../components/private-routes'
 
 type Props = {
   post: PostType
@@ -40,6 +41,7 @@ const Post = ({ post, morePosts, preview }: Props) => {
               </Head>
               <PostHeader
                 title={post.title}
+                premiun={post.premiun}
                 coverImage={post.coverImage}
                 date={post.date}
                 author={post.author}
@@ -53,7 +55,7 @@ const Post = ({ post, morePosts, preview }: Props) => {
   )
 }
 
-export default Post
+export default privateRoutes(Post)
 
 type Params = {
   params: {
@@ -64,6 +66,7 @@ type Params = {
 export async function getStaticProps({ params }: Params) {
   const post = getPostBySlug(params.slug, [
     'title',
+    'premiun',
     'date',
     'slug',
     'author',
